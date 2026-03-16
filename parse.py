@@ -1,5 +1,20 @@
 import sys
-from lex import *
+from lex import TokenType 
+
+class AST:
+    def __init__(self):
+        self.head = None
+        self.tree = []
+
+    def add(self, node):
+        return self.tree.append(node)
+
+class Node():
+    def __init__(self, token, left = None, right = None):
+        self.token = token
+        self.value = token.text
+        self.left = left
+        self.right = right 
 
 class Parser:
     def __init__(self, lexer, emitter):
@@ -197,7 +212,7 @@ class Parser:
             self.nextToken()
         elif self.checkToken(TokenType.IDENT):
             if self.curToken.text not in self.symbols:
-                self.abort("Refrencing variable before assignment: " + self.curToken.text)
+                self.abort("Referencing variable before assignment: " + self.curToken.text)
             
             self.emitter.emit(self.curToken.text)
             self.nextToken()
