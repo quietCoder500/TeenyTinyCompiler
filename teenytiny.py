@@ -18,6 +18,7 @@ def main():
 
     parser.program() # Start the parser.
     emitter.writeFile()
+    print(parser.ast.tree)
     print("Parsing completed.")
 
 main()
